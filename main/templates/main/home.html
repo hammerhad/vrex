@@ -1,0 +1,148 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+	<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/aframe-animation-component@7.1.0/dist/aframe-animation-component.min.js"></script>
+
+	  <style>
+	  #video-container {
+		width: auto;
+		height: 100%;
+	  }
+	</style>
+</head>
+<body>
+<div id="video-container"></div>
+<a-scene>
+<!-- // es aris menu romelic unda gadamisamartdes -->
+<a-image id="object-menu" src="{{ MainPageMenu.image.url }}" data-raycastable position="{{ MainPageMenu.position }}" rotation="{{ MainPageMenu.rotation }}" scale="{{ MainPageMenu.scale }}" cursor-listener event-set__activate="_event: click"></a-image>
+<a-camera>
+<a-cursor raycaster="objects: [data-raycastable]"></a-cursor>
+</a-camera>
+
+<a-text id="text1" value="{{ d3text1.text_geo }}" position="{{ d3text1.position }}" rotation="{{ d3text1.rotation }}" font="{{ d3text1.font }}" color="{{ d3text1.color }}" material="{{ d3text1.material }}" visible="{{ d3text1.visible }}"></a-text>\
+
+<a-text id="text2" value="{{ d3text2.text_geo }}" position="{{ d3text2.position }}" rotation="{{ d3text2.rotation }}" font="{{ d3text2.font }}" color="{{ d3text2.color }}" material="{{ d3text2.material }}" visible="{{ d3text2.visible }}"></a-text>
+
+
+
+	<a-image id="object-menu2" src="{{ restaurant.logo.url }}" data-raycastable position="{{ MainPageMenu2.position }}" rotation="{{ MainPageMenu2.rotation }}" scale="{{ MainPageMenu2.scale }}" cursor-listener event-set__activate="_event: click"></a-image>
+	<a-camera>
+	<a-cursor raycaster="objects: [data-raycastable]"></a-cursor>
+	</a-camera>
+
+	<div id="video-container"></div>
+
+  {% for model in models %}
+  <a-gltf-model id="object-{{ forloop.counter }}" src="{{ model.model.url }}" data-raycastable position="{{ model.position }}" rotation="{{ model.rotation }}" scale="{{ model.scale }}" cursor-listener event-set__activate="_event: click"></a-gltf-model>
+  <a-camera>
+    <a-cursor raycaster="objects: [data-raycastable]"></a-cursor>
+  </a-camera>
+  <a-image id="image-{{ forloop.counter }}" src="{{ model.image.url }}" position="{{ model.imgposition }}" rotation="{{ model.imgrotation }}" scale="{{ model.imgscale }}" visible="false"></a-image>
+
+  <script>
+    document.querySelector("#object-{{ forloop.counter }}").addEventListener("mouseenter", function() {
+      document.querySelector("#image-{{ forloop.counter }}").setAttribute("visible", "true");
+    });
+    document.querySelector("#object-{{ forloop.counter }}").addEventListener("mouseleave", function() {
+      document.querySelector("#image-{{ forloop.counter }}").setAttribute("visible", "false");
+    });
+    document.querySelector("#object-{{ forloop.counter }}").addEventListener("click", function() {
+      setTimeout(function() {
+        // location.href = "https://apprenting.com";
+      }, 2000);
+    });
+    document.querySelector("#object-{{ forloop.counter }}").addEventListener("mouseenter", function() {
+      document.querySelector("#object-{{ forloop.counter }}").setAttribute("animation__pulse", "property: scale; dur: 500; to: {{ model.mouseenterscale }}");
+    });
+    document.querySelector("#object-{{ forloop.counter }}").addEventListener("mouseleave", function() {
+      document.querySelector("#object-{{ forloop.counter }}").setAttribute("animation__pulse", "property: scale; dur: 500; to: {{ model.scale }}");
+    });
+  </script>
+{% endfor %}
+
+
+
+<script>
+	// ---------------------------------------------------------------------------- menu da gadamisamarteba + animacia ----------------------------------------------------------
+	    document.querySelector("#object-menu").addEventListener("click", function() {
+	        setTimeout(function() {
+            location.href = "{% url 'menu-page' id=restaurant.id %}";
+	        }, 1500);
+	    });
+	    document.querySelector("#object-menu").addEventListener("mouseenter", function() {
+	        document.querySelector("#object-menu").setAttribute("animation__pulse", "property: scale; dur: 500; to: {{ MainPageMenu.animactionsize }}");
+					{% if d3text1.hide == True %}
+						document.querySelector("#text1").setAttribute("visible", "false");
+					{% else %}
+						document.querySelector("#text1").setAttribute("visible", "true");
+					{% endif %}
+
+					{% if d3text2.hide == True %}
+						document.querySelector("#text2").setAttribute("visible", "false");
+					{% else %}
+						document.querySelector("#text2").setAttribute("visible", "true");
+					{% endif %}
+
+	    });
+	    document.querySelector("#object-menu").addEventListener("mouseleave", function() {
+	        document.querySelector("#object-menu").setAttribute("animation__pulse", "property: scale; dur: 500; to: {{ MainPageMenu.scale }}");
+					document.querySelector("#text1").setAttribute("visible", "false");
+        	document.querySelector("#text2").setAttribute("visible", "false");
+	    });
+
+			// ---------------------------------------------------------------------------- menu da gadamisamarteba + animacia ----------------------------------------------------------
+			    document.querySelector("#object-menu2").addEventListener("click", function() {
+			        setTimeout(function() {
+			           location.href = "#";
+			        }, 1500);
+			    });
+			    document.querySelector("#object-menu2").addEventListener("mouseenter", function() {
+			        document.querySelector("#object-menu2").setAttribute("animation__pulse", "property: scale; dur: 500; to: {{ MainPageMenu2.animactionsize }}");
+			    });
+			    document.querySelector("#object-menu2").addEventListener("mouseleave", function() {
+			        document.querySelector("#object-menu2").setAttribute("animation__pulse", "property: scale; dur: 500; to: {{ MainPageMenu2.scale }}");
+			    });
+
+
+
+  // ----------------------------------------------------------------           Get the video container ------------------------------------------------------------------------------
+
+  const videoContainer = document.getElementById("video-container");
+
+  // Ask for user permission to access the camera
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
+    .then(stream => {
+      // Create a video element and set its source to the camera stream
+      const video = document.createElement("video");
+      video.srcObject = stream;
+
+      // Add the video element to the page
+      videoContainer.appendChild(video);
+
+      // Start playing the video
+      video.play();
+
+      // Add a click event to the video element to make it fullscreen
+      video.addEventListener("click", function() {
+        if (document.fullscreenEnabled) {
+          video.requestFullscreen();
+        }
+      });
+    })
+    .catch(error => {
+      console.error("Error accessing camera:", error);
+    });
+
+</script>
+
+</body>
+</html>
+{% endblock content %}

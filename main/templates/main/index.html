@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="shortcut icon" href="https://aaawww.org/logoicon.png" type="">
+    <link rel="preload" href="https://aaawww.org/png/menu1.png" as="model">
+    <link rel="preload" href="https://aaawww.org/3d/pizza/pizza.gltf" as="model">
+    <link rel="preload" href="https://aaawww.org/3d/raw_steak.glb" as="model">
+    <link rel="preload" href="https://aaawww.org/png/offer.png" as="model">
+    <link rel="preload" href="https://aaawww.org/3d/filipino.glb" as="model">
+    <link rel="preload" href="https://aaawww.org/3d/sushi.glb" as="model">
+    <link rel="preload" href="https://aaawww.org/3d/champagne.glb" as="model">    
+    <title>VREX.ONE</title>
+    <style>
+      #languages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+img {
+  width: 300px;
+  height: 300px;
+  cursor: pointer;
+  margin-bottom:40px;
+}
+
+#videoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#ytplayer {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden;
+      }
+      .video-container iframe,
+      .video-container object,
+      .video-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube.com/embed/r9VVoiK9Qoo?autoplay=1&loop=1"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+
+
+
+    <div id="languages">
+      <img src="https://aaawww.org/flag/united-kingdom.png" width="300" height="300" alt="English" onclick="redirect('english')">
+      <img src="https://aaawww.org/flag/spain.png" width="300" height="300" alt="Español" onclick="redirect('spanish')">
+      <img src="https://aaawww.org/flag/georgia.png" width="300" height="300" alt="Georgian" onclick="redirect('georgian')">
+    </div>
+    <script>
+      function redirect(language) {
+        var ua = navigator.userAgent.toLowerCase();
+        var device = "";
+        if (ua.indexOf("iphone") > -1 || ua.indexOf("ipad") > -1) {
+            device = "ios";
+        } else if (ua.indexOf("android") > -1) {
+            device = "android";
+        }
+        if (language === "english" && device === "ios") {
+            window.location.href = "{% url 'main-page' id=1 %}";
+        } else if (language === "english" && device === "android") {
+            window.location.href = "{% url 'main-page' id=1 %}";
+        } else if (language === "spanish" && device === "ios") {
+            window.location.href = "{% url 'main-page' id=1 %}";
+        } else if (language === "spanish" && device === "android") {
+            window.location.href = "{% url 'main-page' id=1 %}";
+        } else if (language === "georgian" && device === "ios") {
+            window.location.href = "{% url 'main-page' id=1 %}";
+        } else if (language === "georgian" && device === "android") {
+            window.location.href = "{% url 'main-page' id=1 %}";
+        }
+      }
+      
+    </script>
+  </body>
+</html>
+

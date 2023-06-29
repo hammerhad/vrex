@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<!--====== Required meta tags ======-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--====== Title ======-->
+    {% if title %}
+		<title>TAPP - {{ title }}</title>
+	{% else %}
+		<title>TAPP</title>
+	{% endif %}
+
+
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="{% static 'main/images/favicon.png' %}" type="image/png">
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+
+    <!--====== Fontawesome css ======-->
+    <link rel="stylesheet" href="{% static 'main/css/font-awesome.min.css' %}">
+
+    <!--====== Magnific Popup css ======-->
+    <link rel="stylesheet" href="{% static 'main/css/animate.min.css' %}">
+
+    <!--====== Magnific Popup css ======-->
+    <link rel="stylesheet" href="{% static 'main/css/magnific-popup.css' %}">
+
+    <!--====== Slick css ======-->
+    <link rel="stylesheet" href="{% static 'main/css/slick.css' %}">
+
+    <!--====== Default css ======-->
+    <link rel="stylesheet" href="{% static 'main/css/custom-animation.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/default.css' %}">
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+
+
+
+</head>
+<body>
+	  
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="loader-wrap">
+        <div class="preloader"><div class="preloader-close">Preloader Close</div></div>
+        <div class="layer layer-one"><span class="overlay"></span></div>
+        <div class="layer layer-two"><span class="overlay"></span></div>
+        <div class="layer layer-three"><span class="overlay"></span></div>
+    </div>
+
+    <!--====== PRELOADER PART ENDS ======-->
+
+
+
+    <!--====== PART ENDS ======-->
+	{% block content %}{% endblock %}
+	<!--====== APPIE BACK TO TOP PART ENDS ======-->
+    <div class="back-to-top">
+        <a href="#"><i class="fal fa-arrow-up"></i></a>
+    </div>
+    <!--====== APPIE BACK TO TOP PART ENDS ======-->
+
+
+
+
+
+
+    <!--====== jquery js ======-->
+    <script src="{% static 'main/js/vendor/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static 'main/js/vendor/jquery-1.12.4.min.js' %}"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'main/js/popper.min.js' %}"></script>
+
+    <!--====== wow js ======-->
+    <script src="{% static 'main/js/wow.js' %}"></script>
+
+    <!--====== Slick js ======-->
+    <script src="{% static 'main/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'main/js/waypoints.min.js' %}"></script>
+
+    <!--====== TweenMax js ======-->
+    <script src="{% static 'main/js/TweenMax.min.js' %}"></script>
+
+    <!--====== Slick js ======-->
+    <script src="{% static 'main/js/slick.min.js' %}"></script>
+
+    <!--====== Magnific Popup js ======-->
+    <script src="{% static 'main/js/jquery.magnific-popup.min.js' %}"></script>
+
+    <!--====== Main js ======-->
+    <script src="{% static 'main/js/main.js' %}"></script>
+    <!-- Start of HubSpot Embed Code -->
+      <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/26307765.js"></script>
+    <!-- End of HubSpot Embed Code -->
+</body>
+</html>
